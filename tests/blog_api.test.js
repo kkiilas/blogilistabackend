@@ -30,7 +30,6 @@ beforeEach(async () => {
   await blogObject.save()
 })
 
-
 test('blogs are returned as json', async () => {
   await api
     .get('/api/blog')
