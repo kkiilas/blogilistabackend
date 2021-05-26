@@ -10,10 +10,6 @@ const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 const mongoose = require('mongoose')
 
-console.log('port in app', config.PORT)
-console.log('mongodb_uri in app', config.MONGODB_URI)
-console.log('bla')
-
 logger.info('connecting to', config.MONGODB_URI)
 
 mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
