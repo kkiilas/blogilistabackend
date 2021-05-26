@@ -12,6 +12,7 @@ const mongoose = require('mongoose')
 
 console.log('port in app', config.PORT)
 console.log('mongodb_uri in app', config.MONGODB_URI)
+console.log('bla')
 
 logger.info('connecting to', config.MONGODB_URI)
 
