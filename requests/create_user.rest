@@ -1,0 +1,34 @@
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+  "username": "käyttäjä2",
+  "name": "Nipitiri",
+  "password": "salasana123"
+}
+###
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+  "name": "Nipitiri",
+  "password": "salasana123"
+}
+###
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+  "username": "bl",
+  "name": "Nipitiri",
+  "password": "salasana123"
+}
+###
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+  "username": "bla",
+  "name": "Nipitiri",
+  "password": "salasana123"
+}

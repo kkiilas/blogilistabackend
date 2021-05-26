@@ -2,8 +2,60 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-  "title": "otsikko",
+  "title": "otsikko10",
   "author": "tekijä",
   "url": "osoite",
-  "likes": 5
+  "likes": 2
+}
+###
+
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "title": "otsikko11",
+  "author": "tekijä",
+  "url": "osoite"
+}
+
+###
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "author": "tekijä",
+  "url": "osoite",
+  "likes": 12
+}
+
+###
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "author": "tekijä",
+  "title": "otsikko10",
+  "likes": 2
+}
+###
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "title": "otsikko16",
+  "author": "Olallaa",
+  "url": "osoite",
+  "likes": 2,
+  "userId": "60a576c2f3af1814f46b2e09"
+}
+###
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImvDpHl0dMOkasOkMiIsImlkIjoiNjBhNWQzNTlhNDQ1NWQzYmI4ODU1ZjNhIiwiaWF0IjoxNjIxODIwNjk3LCJleHAiOjE2MjE4MjQyOTd9.pECrWjUfMFfG9jMeM1pYtFSxrYGoGd3eAefD0A2OT2M
+
+{
+  "url": "https://fullstackopen.com/osa4/token_perustainen_kirjautuminen",
+  "title": "otsikko19",
+  "author": "Erik Wemple",
+  "likes": 0
 }
