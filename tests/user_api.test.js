@@ -65,8 +65,8 @@ describe('when there is initially one user at db', () => {
         const usersAtStart = await helper.usersInDb()
 
         const newUser = {
-          name: 'Alexandria Ocasio-Cortez',
-          password: 'GreenNewDeal',
+          name: 'Maggie Haberman',
+          password: 'salainen',
         }
 
         const result = await api
@@ -85,9 +85,9 @@ describe('when there is initially one user at db', () => {
         const usersAtStart = await helper.usersInDb()
 
         const newUser = {
-          username: 'KP',
-          name: 'Katie Porter',
-          password: 'WhiteBoard',
+          username: 'NK',
+          name: 'Nick Kristof',
+          password: 'salainen',
         }
 
         const result = await api
@@ -107,8 +107,8 @@ describe('when there is initially one user at db', () => {
         const usersAtStart = await helper.usersInDb()
 
         const newUser = {
-          username: 'iomar',
-          name: 'Ilhan Omar'
+          username: 'malexander',
+          name: 'Michelle Alexander'
         }
 
         const result = await api
@@ -127,9 +127,9 @@ describe('when there is initially one user at db', () => {
         const usersAtStart = await helper.usersInDb()
 
         const newUser = {
-          username: 'apressle',
-          name: 'Ayanna Pressley',
-          password: 'cw',
+          username: 'nhannahjones',
+          name: 'Nikole Hannah-Jones',
+          password: 'pw',
         }
 
         const result = await api
