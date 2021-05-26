@@ -89,7 +89,7 @@ describe('when there are initially some blogs saved', () => {
 
       await api
         .post('/api/blogs')
-        .set('Authorization', 'bearer ' + token)
+        .set('Authorization', `bearer ${token}`)
         .send(newBlog)
         .expect(200)
         .expect('Content-Type', /application\/json/)
@@ -145,7 +145,7 @@ describe('when there are initially some blogs saved', () => {
 
       await api
         .post('/api/blogs')
-        .set('Authorization', 'bearer ' + token)
+        .set('Authorization', `bearer ${token}`)
         .send(newBlog)
         .expect(400)
 
@@ -177,7 +177,7 @@ describe('when there are initially some blogs saved', () => {
 
       await api
         .post('/api/blogs')
-        .set('Authorization', 'bearer ' + token)
+        .set('Authorization', `bearer ${token}`)
         .send(newBlog)
         .expect(400)
 
@@ -218,7 +218,7 @@ describe('when there are initially some blogs saved', () => {
 
       await api
         .post('/api/blogs')
-        .set('Authorization', 'bearer ' + token)
+        .set('Authorization', `bearer ${token}`)
         .send(newBlog)
         .expect(200)
         .expect('Content-Type', /application\/json/)
@@ -264,7 +264,7 @@ describe('when there are initially some blogs saved', () => {
 
       await api
         .delete(`/api/blogs/${blogToDelete.id}`)
-        .set('Authorization', 'bearer ' + token)
+        .set('Authorization', `bearer ${token}`)
         .expect(204)
 
       const blogsAtEnd = await helper.blogsInDb()
