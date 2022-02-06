@@ -1,5 +1,6 @@
 const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
+const User = require('../models/user')
 const { userExtractor } = require('../utils/middleware')
 
 blogsRouter.get('/', async (request, response) => {
@@ -33,8 +34,7 @@ blogsRouter.post('/', userExtractor, async (request, response) => {
 
   const savedBlog = await blog.save()
   user.blogs = user.blogs.concat(savedBlog._id)
-  await user.save()
-
+  await User.findByIdAndUpdate(user._id, user)
   response.json(savedBlog.toJSON())
 })
 
@@ -43,11 +43,17 @@ blogsRouter.delete('/:id', userExtractor, async (request, response) => {
   const userid = user._id
 
   const blog = await Blog.findById(request.params.id)
+
   if (blog.user.toString() === userid.toString()) {
     await Blog.findByIdAndRemove(request.params.id)
+
+    user.blogs = user.blogs.filter(blogid => blogid.toString() !== request.params.id.toString())
+    await User.findByIdAndUpdate(user._id, user)
+
     response.status(204).end()
+  } else {
+    response.status(401).json({ error: 'token missing or invalid' })
   }
-  response.status(401).json({ error: 'token missing or invalid' })
 })
 
 blogsRouter.put('/:id', async (request, response) => {
