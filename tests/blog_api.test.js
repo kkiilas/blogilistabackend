@@ -195,7 +195,9 @@ describe('when there are initially some blogs saved', () => {
   })
 
   describe('likes', () => {
-    test('are 0 by default', async () => {
+    let token
+
+    beforeEach(async () => {
       const usersAtStart = await helper.usersInDb()
       const userToPostFrom = usersAtStart[0]
 
@@ -204,12 +206,14 @@ describe('when there are initially some blogs saved', () => {
         id: userToPostFrom.id,
       }
 
-      const token = jwt.sign(
+      token = jwt.sign(
         userForToken,
         process.env.SECRET,
         { expiresIn: 60 * 60 }
       )
+    })
 
+    test('are 0 by default', async () => {
       const newBlog = {
         title: 'Black Lawyers Speak: Stories of the Past, Hopes for the Future',
         author: 'Adam Allington',
@@ -237,6 +241,7 @@ describe('when there are initially some blogs saved', () => {
 
       const resultBlog = await api
         .put(`/api/blogs/${blogToUpdate.id}`)
+        .set('Authorization', `bearer ${token}`)
         .send(blogToUpdate)
         .expect(200)
         .expect('Content-Type', /application\/json/)
@@ -279,6 +284,7 @@ describe('when there are initially some blogs saved', () => {
   })
 })
 
-afterAll(() => {
+afterAll(async () => {
+  await Blog.deleteMany({})
   mongoose.connection.close()
 })

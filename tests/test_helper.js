@@ -5,7 +5,11 @@ const User = require('../models/user')
 const initialBlogs = async () => {
   await User.deleteMany({})
   const passwordHash = await bcryptjs.hash('salainen', 10)
-  const user = new User({ username: 'root', passwordHash })
+  const user = new User({
+    username: 'root',
+    name: 'Testy McTester',
+    passwordHash
+  })
   await user.save()
   const userid = user._id
 

@@ -11,7 +11,11 @@ describe('when there is initially one user at db', () => {
     await User.deleteMany({})
 
     const passwordHash = await bcryptjs.hash('sekret', 10)
-    const user = new User({ username: 'root', passwordHash })
+    const user = new User({
+      username: 'root',
+      name: 'Testy McTester',
+      passwordHash
+    })
 
     await user.save()
   })
@@ -102,6 +106,7 @@ describe('when there is initially one user at db', () => {
         expect(usersAtEnd).toHaveLength(usersAtStart.length)
       })
     })
+
     describe('password', () => {
       test('is missing', async () => {
         const usersAtStart = await helper.usersInDb()
@@ -147,6 +152,7 @@ describe('when there is initially one user at db', () => {
   })
 })
 
-afterAll(() => {
+afterAll(async () => {
+  await User.deleteMany({})
   mongoose.connection.close()
 })

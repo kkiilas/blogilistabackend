@@ -12,6 +12,7 @@ const requestLogger = (request, response, next) => {
 
 const tokenExtractor = (request, response, next) => {
   const authorization = request.get('authorization')
+  // console.log('authorization', authorization)
   request.token = (authorization && authorization.toLowerCase().startsWith('bearer '))
     ? authorization.substring(7)
     : null
@@ -19,9 +20,9 @@ const tokenExtractor = (request, response, next) => {
 }
 
 const userExtractor = async (request, response, next) => {
-  console.log('request.token', request.token)
+  // console.log('request.token', request.token)
   const decodedToken = jwt.verify(request.token, process.env.SECRET)
-  console.log('decodedTokne', decodedToken)
+  // console.log('decodedTokne', decodedToken)
   if (!request.token || !decodedToken.id) {
     return response.status(401).json({ error: 'token missing or invalid' })
   }
