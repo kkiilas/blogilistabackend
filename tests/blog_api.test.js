@@ -27,10 +27,8 @@ describe('when there are initially some blogs saved', () => {
 
   test('a specific blog is within the returned blogs', async () => {
     const response = await api.get('/api/blogs')
-    const titles = response.body.map(r => r.title)
-    expect(titles).toContain(
-      'Go To Statement Considered Harmful'
-    )
+    const titles = response.body.map((r) => r.title)
+    expect(titles).toContain('Go To Statement Considered Harmful')
   })
 
   describe('viewing a specific blog', () => {
@@ -50,17 +48,13 @@ describe('when there are initially some blogs saved', () => {
 
     test('fails with status code 404 if blog does not exist', async () => {
       const validNonexistingId = await helper.nonExistingId()
-      await api
-        .get(`/api/blogs/${validNonexistingId}`)
-        .expect(404)
+      await api.get(`/api/blogs/${validNonexistingId}`).expect(404)
     })
 
     test('fails with status code 400 if id is invalid', async () => {
       const invalidId = '5a3d5da59070081a82a3445'
 
-      await api
-        .get(`/api/blogs/${invalidId}`)
-        .expect(400)
+      await api.get(`/api/blogs/${invalidId}`).expect(400)
     })
   })
 
@@ -71,18 +65,17 @@ describe('when there are initially some blogs saved', () => {
 
       const userForToken = {
         username: userToPostFrom.username,
-        id: userToPostFrom.id,
+        id: userToPostFrom.id
       }
 
-      const token = jwt.sign(
-        userForToken,
-        process.env.SECRET,
-        { expiresIn: 60 * 60 }
-      )
+      const token = jwt.sign(userForToken, process.env.SECRET, {
+        expiresIn: 60 * 60
+      })
 
       const newBlog = {
         url: 'https://www.nytimes.com/2021/03/10/world/europe/harry-meghan-media-race.html',
-        title: 'Under Fire Over Race, British Media Admit There Might be a Problem',
+        title:
+          'Under Fire Over Race, British Media Admit There Might be a Problem',
         author: 'Isabella Kwai',
         likes: 400
       }
@@ -98,7 +91,7 @@ describe('when there are initially some blogs saved', () => {
       const blogsAtEnd = await helper.blogsInDb()
       expect(blogsAtEnd).toHaveLength(initialBlogs.length + 1)
 
-      const titles = blogsAtEnd.map(n => n.title)
+      const titles = blogsAtEnd.map((n) => n.title)
       expect(titles).toContain(
         'Under Fire Over Race, British Media Admit There Might be a Problem'
       )
@@ -108,14 +101,12 @@ describe('when there are initially some blogs saved', () => {
       const newBlog = {
         url: 'https://www.nytimes.com/2021/03/10/world/europe/harry-meghan-media-race.html',
         title: 'What the 1921 Tulsa Race Massacre Destroyed',
-        author: 'Yuliya Parshina-Kottas, Anjali Singhvi, Audra D.S. Burch, Troy Griggs, Mika Gröndahl, Lingdong Huang, Tim Wallace, Jeremy White and Josh Williams',
+        author:
+          'Yuliya Parshina-Kottas, Anjali Singhvi, Audra D.S. Burch, Troy Griggs, Mika Gröndahl, Lingdong Huang, Tim Wallace, Jeremy White and Josh Williams',
         likes: 1921
       }
 
-      await api
-        .post('/api/blogs')
-        .send(newBlog)
-        .expect(401)
+      await api.post('/api/blogs').send(newBlog).expect(401)
 
       const initialBlogs = await helper.initialBlogs()
       const blogsAtEnd = await helper.blogsInDb()
@@ -128,14 +119,12 @@ describe('when there are initially some blogs saved', () => {
 
       const userForToken = {
         username: userToPostFrom.username,
-        id: userToPostFrom.id,
+        id: userToPostFrom.id
       }
 
-      const token = jwt.sign(
-        userForToken,
-        process.env.SECRET,
-        { expiresIn: 60 * 60 }
-      )
+      const token = jwt.sign(userForToken, process.env.SECRET, {
+        expiresIn: 60 * 60
+      })
 
       const newBlog = {
         author: 'Jason Del Rey',
@@ -160,17 +149,16 @@ describe('when there are initially some blogs saved', () => {
 
       const userForToken = {
         username: userToPostFrom.username,
-        id: userToPostFrom.id,
+        id: userToPostFrom.id
       }
 
-      const token = jwt.sign(
-        userForToken,
-        process.env.SECRET,
-        { expiresIn: 60 * 60 }
-      )
+      const token = jwt.sign(userForToken, process.env.SECRET, {
+        expiresIn: 60 * 60
+      })
 
       const newBlog = {
-        title: 'Bias, disrespect, and demotions: Black employees say Amazon has a race problem',
+        title:
+          'Bias, disrespect, and demotions: Black employees say Amazon has a race problem',
         author: 'Jason Del Rey',
         likes: 15
       }
@@ -187,10 +175,10 @@ describe('when there are initially some blogs saved', () => {
     })
   })
 
-  describe('\'id\'', () => {
+  describe(`'id'`, () => {
     test('is the name of the unique identifier property of the blog posts', async () => {
       const response = await api.get('/api/blogs')
-      response.body.forEach(blog => expect(blog.id).toBeDefined())
+      response.body.forEach((blog) => expect(blog.id).toBeDefined())
     })
   })
 
@@ -203,14 +191,10 @@ describe('when there are initially some blogs saved', () => {
 
       const userForToken = {
         username: userToPostFrom.username,
-        id: userToPostFrom.id,
+        id: userToPostFrom.id
       }
 
-      token = jwt.sign(
-        userForToken,
-        process.env.SECRET,
-        { expiresIn: 60 * 60 }
-      )
+      token = jwt.sign(userForToken, process.env.SECRET, { expiresIn: 60 * 60 })
     })
 
     test('are 0 by default', async () => {
@@ -231,7 +215,9 @@ describe('when there are initially some blogs saved', () => {
       const blogsAtEnd = await helper.blogsInDb()
       expect(blogsAtEnd).toHaveLength(initialBlogs.length + 1)
 
-      const foundBlog = blogsAtEnd.find(blog => blog.author === 'Adam Allington')
+      const foundBlog = blogsAtEnd.find(
+        (blog) => blog.author === 'Adam Allington'
+      )
       expect(foundBlog.likes).toBe(0)
     })
 
@@ -239,9 +225,10 @@ describe('when there are initially some blogs saved', () => {
       const blogsAtStart = await helper.blogsInDb()
       const blogToUpdate = blogsAtStart[0]
 
+      blogToUpdate.user = blogToUpdate.user.id
+
       const resultBlog = await api
         .put(`/api/blogs/${blogToUpdate.id}`)
-        .set('Authorization', `bearer ${token}`)
         .send(blogToUpdate)
         .expect(200)
         .expect('Content-Type', /application\/json/)
@@ -258,14 +245,12 @@ describe('when there are initially some blogs saved', () => {
 
       const userForToken = {
         username: userToDeleteFrom.username,
-        id: userToDeleteFrom.id,
+        id: userToDeleteFrom.id
       }
 
-      const token = jwt.sign(
-        userForToken,
-        process.env.SECRET,
-        { expiresIn: 60 * 60 }
-      )
+      const token = jwt.sign(userForToken, process.env.SECRET, {
+        expiresIn: 60 * 60
+      })
 
       await api
         .delete(`/api/blogs/${blogToDelete.id}`)
@@ -274,11 +259,9 @@ describe('when there are initially some blogs saved', () => {
 
       const blogsAtEnd = await helper.blogsInDb()
 
-      expect(blogsAtEnd).toHaveLength(
-        blogsAtStart.length - 1
-      )
+      expect(blogsAtEnd).toHaveLength(blogsAtStart.length - 1)
 
-      const titles = blogsAtEnd.map(r => r.title)
+      const titles = blogsAtEnd.map((r) => r.title)
       expect(titles).not.toContain(blogToDelete.title)
     })
   })

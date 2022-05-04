@@ -19,14 +19,14 @@ const initialBlogs = async () => {
       title: 'React patterns',
       author: 'Michael Chan',
       user: userid,
-      likes: 7,
+      likes: 7
     },
     {
       url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
       title: 'Go To Statement Considered Harmful',
       author: 'Edsger W. Dijkstra',
       user: userid,
-      likes: 5,
+      likes: 5
     }
   ]
 }
@@ -44,19 +44,18 @@ const nonExistingId = async () => {
 }
 
 const blogsInDb = async () => {
-  const blogs = await Blog.find({})
-    .populate('user', { username: 1, name: 1 })
-  return blogs.map(blog => blog.toJSON())
+  const blogs = await Blog.find({}).populate('user', { username: 1, name: 1 })
+  return blogs.map((blog) => blog.toJSON())
 }
 
 const usersInDb = async () => {
   const users = await User.find({})
-  return users.map(u => u.toJSON())
+  return users.map((u) => u.toJSON())
 }
 
 module.exports = {
   initialBlogs,
   nonExistingId,
   blogsInDb,
-  usersInDb,
+  usersInDb
 }
