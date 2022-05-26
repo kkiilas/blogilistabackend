@@ -10,7 +10,7 @@ describe('when there are initially some blogs saved', () => {
   beforeEach(async () => {
     await Blog.deleteMany({})
     await Blog.insertMany(await helper.initialBlogs())
-  })
+  }, 6000)
 
   test('blogs are returned as json', async () => {
     await api
